@@ -11,7 +11,7 @@ export default function HomePage() {
   return (
     <main className={styles.page}>
       <header className={styles.header}>
-        <div className={styles.brand}><span>MJ</span><div><strong>MANDIOK</strong><small>JIU-JITSU</small></div></div>
+        <div className={styles.brand}><span>MJ</span><div><strong>Rick Pereira</strong><small>JIU-JITSU</small></div></div>
         <nav><a href="#sobre">Sobre</a><a href="#destaques">Destaques</a><a href="#eventos">Eventos</a><a href="#contato">Contato</a></nav>
         <Link className={styles.login} href="/login">Área do aluno</Link>
       </header>
@@ -19,13 +19,13 @@ export default function HomePage() {
       <section className={styles.hero}>
         <div>
           <span className={styles.eyebrow}>DISCIPLINA • RESPEITO • EVOLUÇÃO</span>
-          <h1>Mais que luta.<br/><em>Uma equipe.</em></h1>
+          <h1>Mais que luta.<br /><em>Uma equipe.</em></h1>
           <p>Treinos para iniciantes, competidores, crianças e adultos. Evolução técnica com acompanhamento completo.</p>
           <div className={styles.actions}><a href="#contato">Quero treinar</a><Link href="/login">Entrar no sistema</Link></div>
         </div>
         <div className={styles.heroCard}>
           <div className={styles.glow}></div>
-          <strong>MANDIOK</strong>
+          <strong>Rick Pereira</strong>
           <span>JIU-JITSU</span>
           <small>Gestão, performance e comunidade.</small>
         </div>
@@ -40,7 +40,7 @@ export default function HomePage() {
       <section id="destaques" className={styles.section}>
         <span className={styles.kicker}>ALUNOS EM DESTAQUE</span>
         <div className={styles.grid}>
-          {highlights.map((h) => <article className={styles.card} key={h.name}><div className={styles.avatar}>{h.name.slice(0,1)}</div><h3>{h.name}</h3><strong>{h.title}</strong><p>{h.text}</p></article>)}
+          {highlights.map((h) => <article className={styles.card} key={h.name}><div className={styles.avatar}>{h.name.slice(0, 1)}</div><h3>{h.name}</h3><strong>{h.title}</strong><p>{h.text}</p></article>)}
         </div>
       </section>
 
@@ -59,7 +59,7 @@ export default function HomePage() {
         <div className={styles.mapPlaceholder}>MAPA / COMO CHEGAR</div>
       </section>
 
-      <footer>© {new Date().getFullYear()} Mandiok Jiu-Jitsu • Disciplina e evolução.</footer>
+      <footer>© {new Date().getFullYear()} Rick Pereira Jiu-Jitsu • Disciplina e evolução.</footer>
     </main>
   );
 }

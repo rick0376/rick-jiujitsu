@@ -3,7 +3,7 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: "Mandiok Jiu-Jitsu",
     short_name: "Mandiok",
-    description: "Gestão completa da equipe Mandiok Jiu-Jitsu",
+    description: "Gestão completa da equipe Rick Pereira Jiu-Jitsu",
     start_url: "/",
     display: "standalone",
     background_color: "#111216",

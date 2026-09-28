@@ -2,9 +2,12 @@
 
 .page {
     position: relative;
+
     display: flex;
+
     width: 100%;
     min-height: 100vh;
+
     overflow: hidden;
 
     background-color: #090a0c;
@@ -50,79 +53,89 @@
     width: min(430px, 100%);
 }
 
-/* =========================
+/* =========================================
    TABLET / MOBILE
-   ========================= */
+   ========================================= */
 
 @media (max-width: 900px) {
     .page {
+        width: 100%;
+
+        height: 100svh;
         min-height: 100svh;
+        max-height: 100svh;
+
+        overflow: hidden;
 
         background-image: url("/images/login/login-background-mobile.png");
         background-repeat: no-repeat;
-
-        /*
-         * Para essa foto, o melhor é manter cover
-         * e trabalhar o posicionamento.
-         */
         background-size: cover;
-        background-position: center top;
+        background-position: center center;
     }
 
     .overlay {
         background:
             linear-gradient(180deg,
                 rgba(0, 0, 0, 0.02) 0%,
-                rgba(0, 0, 0, 0.06) 20%,
-                rgba(0, 0, 0, 0.14) 40%,
-                rgba(0, 0, 0, 0.34) 62%,
-                rgba(0, 0, 0, 0.74) 100%);
+                rgba(0, 0, 0, 0.05) 25%,
+                rgba(0, 0, 0, 0.15) 50%,
+                rgba(0, 0, 0, 0.42) 78%,
+                rgba(0, 0, 0, 0.70) 100%);
     }
 
     .content {
+        width: 100%;
+        height: 100%;
+
+        min-height: 0;
+
+        display: flex;
         align-items: flex-end;
         justify-content: center;
 
-        width: 100%;
-        min-height: 100svh;
+        overflow: hidden;
 
-        /*
-         * Empurra o card para baixo e deixa
-         * a cena aparecer mais acima.
-         */
-        padding: clamp(260px, 42svh, 360px) 14px 18px;
+        padding: 16px 14px 18px;
     }
 
     .formArea {
         width: min(390px, 94vw);
+
+        max-height: calc(100svh - 34px);
     }
 }
 
-/* =========================
+/* =========================================
    MOBILE MENOR
-   ========================= */
+   ========================================= */
 
 @media (max-width: 520px) {
     .page {
         background-size: cover;
-        background-position: center top;
+        background-position: center center;
     }
 
     .content {
-        padding: clamp(250px, 40svh, 340px) 12px 16px;
+        padding: 12px 12px 14px;
     }
 
     .formArea {
         width: min(385px, 100%);
+        max-height: calc(100svh - 26px);
     }
 }
 
-/* =========================
+/* =========================================
    TELAS MUITO PEQUENAS
-   ========================= */
+   ========================================= */
 
 @media (max-width: 380px) {
     .content {
-        padding: clamp(230px, 38svh, 320px) 10px 14px;
+        padding: 10px;
+    }
+
+    .formArea {
+        width: 100%;
+        max-height: calc(100svh - 20px);
     }
 }

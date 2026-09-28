@@ -69,7 +69,7 @@ export default function LoginForm() {
       <div className={styles.logoArea}>
         <Image
           src="/images/logo/logo.png"
-          alt="Mandiok Jiu-Jitsu"
+          alt="Rick Pereira Jiu-Jitsu"
           width={150}
           height={150}
           priority
