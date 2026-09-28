@@ -1,3 +1,5 @@
+// prisma/schema.prisma
+
 generator client {
   provider = "prisma-client-js"
 }
@@ -53,6 +55,11 @@ enum EventType {
   OTHER
 }
 
+enum SiteCardSection {
+  MAIN_FEATURE
+  TIMER_FEATURE
+}
+
 model User {
   id              String           @id @default(cuid())
   name            String
@@ -93,8 +100,8 @@ model Permission {
 model UserRole {
   userId String
   roleId String
-  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
-  role   Role @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  role   Role   @relation(fields: [roleId], references: [id], onDelete: Cascade)
 
   @@id([userId, roleId])
 }
@@ -119,25 +126,25 @@ model UserPermission {
 }
 
 model Student {
-  id              String             @id @default(cuid())
-  registration    String             @unique
+  id              String                    @id @default(cuid())
+  registration    String                    @unique
   name            String
   birthDate       DateTime?
-  cpf             String?            @unique
+  cpf             String?                   @unique
   email           String?
   phone           String?
   emergencyPhone  String?
   guardianName    String?
   guardianPhone   String?
   photoUrl        String?
-  weightKg        Decimal?           @db.Decimal(5,2)
+  weightKg        Decimal?                  @db.Decimal(5, 2)
   heightCm        Int?
-  belt            Belt               @default(WHITE)
-  stripes         Int                @default(0)
-  status          StudentStatus      @default(ACTIVE)
-  joinedAt        DateTime           @default(now())
-  monthlyFee      Decimal            @default(0) @db.Decimal(10,2)
-  dueDay          Int                @default(10)
+  belt            Belt                      @default(WHITE)
+  stripes         Int                       @default(0)
+  status          StudentStatus             @default(ACTIVE)
+  joinedAt        DateTime                  @default(now())
+  monthlyFee      Decimal                   @default(0) @db.Decimal(10, 2)
+  dueDay          Int                       @default(10)
   notes           String?
   medicalNotes    String?
   user            User?
@@ -147,22 +154,22 @@ model Student {
   payments        Payment[]
   enrollments     Enrollment[]
   competitionRegs CompetitionRegistration[]
-  createdAt       DateTime           @default(now())
-  updatedAt       DateTime           @updatedAt
+  createdAt       DateTime                  @default(now())
+  updatedAt       DateTime                  @updatedAt
 }
 
 model ClassGroup {
-  id          String       @id @default(cuid())
-  name        String       @unique
+  id          String            @id @default(cuid())
+  name        String            @unique
   description String?
   weekday     Int?
   startTime   String?
   endTime     String?
-  active      Boolean      @default(true)
+  active      Boolean           @default(true)
   enrollments Enrollment[]
   sessions    TrainingSession[]
-  createdAt   DateTime     @default(now())
-  updatedAt   DateTime     @updatedAt
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
 }
 
 model Enrollment {
@@ -201,60 +208,61 @@ model Attendance {
 }
 
 model Graduation {
-  id         String   @id @default(cuid())
-  studentId  String
-  belt       Belt
-  stripes    Int      @default(0)
+  id          String   @id @default(cuid())
+  studentId   String
+  belt        Belt
+  stripes     Int      @default(0)
   graduatedAt DateTime
-  instructor String?
-  notes      String?
-  student    Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
-  createdAt  DateTime @default(now())
+  instructor  String?
+  notes       String?
+  student     Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  createdAt   DateTime @default(now())
 }
 
 model Evaluation {
-  id            String   @id @default(cuid())
-  studentId     String
-  evaluatedAt   DateTime @default(now())
-  technique     Int
-  discipline    Int
-  conditioning  Int
-  attendance    Int
-  evolution     Int
-  notes         String?
-  evaluator     String?
-  student       Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
-  createdAt     DateTime @default(now())
+  id           String   @id @default(cuid())
+  studentId    String
+  evaluatedAt  DateTime @default(now())
+  technique    Int
+  discipline   Int
+  conditioning Int
+  attendance   Int
+  evolution    Int
+  notes        String?
+  evaluator    String?
+  student      Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  createdAt    DateTime @default(now())
 }
 
 model Payment {
-  id          String        @id @default(cuid())
-  studentId   String
-  reference   String
-  amount      Decimal       @db.Decimal(10,2)
-  dueDate     DateTime
-  paidAt      DateTime?
-  status      PaymentStatus @default(PENDING)
-  method      String?
-  discount    Decimal       @default(0) @db.Decimal(10,2)
-  notes       String?
-  student     Student       @relation(fields: [studentId], references: [id], onDelete: Cascade)
-  createdAt   DateTime      @default(now())
-  updatedAt   DateTime      @updatedAt
+  id        String        @id @default(cuid())
+  studentId String
+  reference String
+  amount    Decimal       @db.Decimal(10, 2)
+  dueDate   DateTime
+  paidAt    DateTime?
+  status    PaymentStatus @default(PENDING)
+  method    String?
+  discount  Decimal       @default(0) @db.Decimal(10, 2)
+  notes     String?
+  student   Student       @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
 }
 
 model Event {
-  id          String    @id @default(cuid())
-  title       String
-  description String?
-  type        EventType @default(OTHER)
-  startsAt    DateTime
-  endsAt      DateTime?
-  location    String?
-  coverUrl    String?
-  published   Boolean   @default(false)
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
+  id            String    @id @default(cuid())
+  title         String
+  description   String?
+  type          EventType @default(OTHER)
+  startsAt      DateTime
+  endsAt        DateTime?
+  location      String?
+  coverUrl      String?
+  coverPublicId String?
+  published     Boolean   @default(false)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
 }
 
 model Competition {
@@ -282,14 +290,32 @@ model CompetitionRegistration {
 }
 
 model Highlight {
-  id          String   @id @default(cuid())
-  studentName String
-  title       String
-  description String?
-  photoUrl    String?
-  active      Boolean  @default(true)
-  sortOrder   Int      @default(0)
-  createdAt   DateTime @default(now())
+  id            String   @id @default(cuid())
+  studentName   String
+  title         String
+  description   String?
+  photoUrl      String?
+  photoPublicId String?
+  active        Boolean  @default(true)
+  sortOrder     Int      @default(0)
+  createdAt     DateTime @default(now())
+}
+
+model SiteCard {
+  id            String          @id @default(cuid())
+  slug          String          @unique
+  section       SiteCardSection
+  title         String
+  description   String?
+  bullets       Json?
+  linkLabel     String?
+  linkHref      String?
+  imageUrl      String?
+  imagePublicId String?
+  active        Boolean         @default(true)
+  sortOrder     Int             @default(0)
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
 }
 
 model SiteSetting {
@@ -300,12 +326,12 @@ model SiteSetting {
 }
 
 model AuditLog {
-  id         String   @id @default(cuid())
-  userId     String?
-  action     String
-  entity     String
-  entityId   String?
-  metadata   Json?
-  ip         String?
-  createdAt  DateTime @default(now())
+  id        String   @id @default(cuid())
+  userId    String?
+  action    String
+  entity    String
+  entityId  String?
+  metadata  Json?
+  ip        String?
+  createdAt DateTime @default(now())
 }
