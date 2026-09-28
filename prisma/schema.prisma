@@ -1,0 +1,311 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum UserStatus {
+  ACTIVE
+  INACTIVE
+  BLOCKED
+}
+
+enum StudentStatus {
+  ACTIVE
+  INACTIVE
+  PAUSED
+  CANCELED
+}
+
+enum PaymentStatus {
+  PENDING
+  PAID
+  OVERDUE
+  CANCELED
+  EXEMPT
+}
+
+enum AttendanceStatus {
+  PRESENT
+  ABSENT
+  JUSTIFIED
+}
+
+enum Belt {
+  WHITE
+  BLUE
+  PURPLE
+  BROWN
+  BLACK
+  RED_BLACK
+  RED_WHITE
+  RED
+}
+
+enum EventType {
+  TRAINING
+  GRADUATION
+  COMPETITION
+  SEMINAR
+  SOCIAL
+  OTHER
+}
+
+model User {
+  id              String           @id @default(cuid())
+  name            String
+  email           String           @unique
+  passwordHash    String
+  phone           String?
+  photoUrl        String?
+  status          UserStatus       @default(ACTIVE)
+  studentId       String?          @unique
+  student         Student?         @relation(fields: [studentId], references: [id], onDelete: SetNull)
+  roleAssignments UserRole[]
+  permissions     UserPermission[]
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+}
+
+model Role {
+  id          String           @id @default(cuid())
+  name        String           @unique
+  description String?
+  isSystem    Boolean          @default(false)
+  users       UserRole[]
+  permissions RolePermission[]
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+}
+
+model Permission {
+  id          String           @id @default(cuid())
+  code        String           @unique
+  label       String
+  description String?
+  roles       RolePermission[]
+  users       UserPermission[]
+  createdAt   DateTime         @default(now())
+}
+
+model UserRole {
+  userId String
+  roleId String
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  role   Role @relation(fields: [roleId], references: [id], onDelete: Cascade)
+
+  @@id([userId, roleId])
+}
+
+model RolePermission {
+  roleId       String
+  permissionId String
+  role         Role       @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  permission   Permission @relation(fields: [permissionId], references: [id], onDelete: Cascade)
+
+  @@id([roleId, permissionId])
+}
+
+model UserPermission {
+  userId       String
+  permissionId String
+  allowed      Boolean    @default(true)
+  user         User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  permission   Permission @relation(fields: [permissionId], references: [id], onDelete: Cascade)
+
+  @@id([userId, permissionId])
+}
+
+model Student {
+  id              String             @id @default(cuid())
+  registration    String             @unique
+  name            String
+  birthDate       DateTime?
+  cpf             String?            @unique
+  email           String?
+  phone           String?
+  emergencyPhone  String?
+  guardianName    String?
+  guardianPhone   String?
+  photoUrl        String?
+  weightKg        Decimal?           @db.Decimal(5,2)
+  heightCm        Int?
+  belt            Belt               @default(WHITE)
+  stripes         Int                @default(0)
+  status          StudentStatus      @default(ACTIVE)
+  joinedAt        DateTime           @default(now())
+  monthlyFee      Decimal            @default(0) @db.Decimal(10,2)
+  dueDay          Int                @default(10)
+  notes           String?
+  medicalNotes    String?
+  user            User?
+  attendances     Attendance[]
+  graduations     Graduation[]
+  evaluations     Evaluation[]
+  payments        Payment[]
+  enrollments     Enrollment[]
+  competitionRegs CompetitionRegistration[]
+  createdAt       DateTime           @default(now())
+  updatedAt       DateTime           @updatedAt
+}
+
+model ClassGroup {
+  id          String       @id @default(cuid())
+  name        String       @unique
+  description String?
+  weekday     Int?
+  startTime   String?
+  endTime     String?
+  active      Boolean      @default(true)
+  enrollments Enrollment[]
+  sessions    TrainingSession[]
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+}
+
+model Enrollment {
+  studentId String
+  classId   String
+  student   Student    @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  class     ClassGroup @relation(fields: [classId], references: [id], onDelete: Cascade)
+  createdAt DateTime   @default(now())
+
+  @@id([studentId, classId])
+}
+
+model TrainingSession {
+  id          String       @id @default(cuid())
+  title       String
+  date        DateTime
+  classId     String?
+  class       ClassGroup?  @relation(fields: [classId], references: [id], onDelete: SetNull)
+  notes       String?
+  attendances Attendance[]
+  createdAt   DateTime     @default(now())
+}
+
+model Attendance {
+  id        String           @id @default(cuid())
+  sessionId String
+  studentId String
+  status    AttendanceStatus @default(PRESENT)
+  checkInAt DateTime?
+  notes     String?
+  session   TrainingSession  @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  student   Student          @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  createdAt DateTime         @default(now())
+
+  @@unique([sessionId, studentId])
+}
+
+model Graduation {
+  id         String   @id @default(cuid())
+  studentId  String
+  belt       Belt
+  stripes    Int      @default(0)
+  graduatedAt DateTime
+  instructor String?
+  notes      String?
+  student    Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  createdAt  DateTime @default(now())
+}
+
+model Evaluation {
+  id            String   @id @default(cuid())
+  studentId     String
+  evaluatedAt   DateTime @default(now())
+  technique     Int
+  discipline    Int
+  conditioning  Int
+  attendance    Int
+  evolution     Int
+  notes         String?
+  evaluator     String?
+  student       Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  createdAt     DateTime @default(now())
+}
+
+model Payment {
+  id          String        @id @default(cuid())
+  studentId   String
+  reference   String
+  amount      Decimal       @db.Decimal(10,2)
+  dueDate     DateTime
+  paidAt      DateTime?
+  status      PaymentStatus @default(PENDING)
+  method      String?
+  discount    Decimal       @default(0) @db.Decimal(10,2)
+  notes       String?
+  student     Student       @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+}
+
+model Event {
+  id          String    @id @default(cuid())
+  title       String
+  description String?
+  type        EventType @default(OTHER)
+  startsAt    DateTime
+  endsAt      DateTime?
+  location    String?
+  coverUrl    String?
+  published   Boolean   @default(false)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Competition {
+  id            String                    @id @default(cuid())
+  name          String
+  date          DateTime
+  location      String?
+  notes         String?
+  registrations CompetitionRegistration[]
+  createdAt     DateTime                  @default(now())
+}
+
+model CompetitionRegistration {
+  id            String      @id @default(cuid())
+  competitionId String
+  studentId     String
+  category      String?
+  weightClass   String?
+  result        String?
+  medal         String?
+  competition   Competition @relation(fields: [competitionId], references: [id], onDelete: Cascade)
+  student       Student     @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  @@unique([competitionId, studentId])
+}
+
+model Highlight {
+  id          String   @id @default(cuid())
+  studentName String
+  title       String
+  description String?
+  photoUrl    String?
+  active      Boolean  @default(true)
+  sortOrder   Int      @default(0)
+  createdAt   DateTime @default(now())
+}
+
+model SiteSetting {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  value     String
+  updatedAt DateTime @updatedAt
+}
+
+model AuditLog {
+  id         String   @id @default(cuid())
+  userId     String?
+  action     String
+  entity     String
+  entityId   String?
+  metadata   Json?
+  ip         String?
+  createdAt  DateTime @default(now())
+}

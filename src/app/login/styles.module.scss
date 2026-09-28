@@ -1,0 +1,128 @@
+// src/app/login/styles.module.scss
+
+.page {
+    position: relative;
+    display: flex;
+    width: 100%;
+    min-height: 100vh;
+    overflow: hidden;
+
+    background-color: #090a0c;
+    background-image: url("/images/login/login-background-desktop.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.overlay {
+    position: absolute;
+    inset: 0;
+
+    background:
+        linear-gradient(90deg,
+            rgba(0, 0, 0, 0.04) 0%,
+            rgba(0, 0, 0, 0.08) 40%,
+            rgba(0, 0, 0, 0.38) 68%,
+            rgba(0, 0, 0, 0.76) 100%);
+
+    pointer-events: none;
+}
+
+.content {
+    position: relative;
+    z-index: 2;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    width: 100%;
+    min-height: 100vh;
+
+    padding: 40px clamp(30px, 7vw, 120px);
+}
+
+.formArea {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: min(430px, 100%);
+}
+
+/* =========================
+   TABLET / MOBILE
+   ========================= */
+
+@media (max-width: 900px) {
+    .page {
+        min-height: 100svh;
+
+        background-image: url("/images/login/login-background-mobile.png");
+        background-repeat: no-repeat;
+
+        /*
+         * Para essa foto, o melhor é manter cover
+         * e trabalhar o posicionamento.
+         */
+        background-size: cover;
+        background-position: center top;
+    }
+
+    .overlay {
+        background:
+            linear-gradient(180deg,
+                rgba(0, 0, 0, 0.02) 0%,
+                rgba(0, 0, 0, 0.06) 20%,
+                rgba(0, 0, 0, 0.14) 40%,
+                rgba(0, 0, 0, 0.34) 62%,
+                rgba(0, 0, 0, 0.74) 100%);
+    }
+
+    .content {
+        align-items: flex-end;
+        justify-content: center;
+
+        width: 100%;
+        min-height: 100svh;
+
+        /*
+         * Empurra o card para baixo e deixa
+         * a cena aparecer mais acima.
+         */
+        padding: clamp(260px, 42svh, 360px) 14px 18px;
+    }
+
+    .formArea {
+        width: min(390px, 94vw);
+    }
+}
+
+/* =========================
+   MOBILE MENOR
+   ========================= */
+
+@media (max-width: 520px) {
+    .page {
+        background-size: cover;
+        background-position: center top;
+    }
+
+    .content {
+        padding: clamp(250px, 40svh, 340px) 12px 16px;
+    }
+
+    .formArea {
+        width: min(385px, 100%);
+    }
+}
+
+/* =========================
+   TELAS MUITO PEQUENAS
+   ========================= */
+
+@media (max-width: 380px) {
+    .content {
+        padding: clamp(230px, 38svh, 320px) 10px 14px;
+    }
+}
