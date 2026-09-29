@@ -1,0 +1,174 @@
+// src/components/site/home/Cronometros/styles.module.scss
+
+.section {
+    position: relative;
+    padding: 15px 20px 18px;
+    overflow: hidden;
+    color: #fff;
+    background:
+        radial-gradient(circle at 22% 100%,
+            rgba(226, 168, 31, 0.14),
+            transparent 30%),
+        var(--site-dark);
+}
+
+.section::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    opacity: 0.1;
+    background:
+        url("/images/login/login-background-desktop.png") center / cover no-repeat;
+}
+
+.title,
+.grid {
+    position: relative;
+    z-index: 1;
+    width: min(1200px, 100%);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.title {
+    display: grid;
+    grid-template-columns: 42px 1fr auto;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 13px;
+}
+
+.titleIcon {
+    color: var(--site-primary);
+}
+
+.title h2 {
+    margin: 0;
+    font-size: 19px;
+}
+
+.title p {
+    margin: 2px 0 0;
+    color: #bdbdbd;
+    font-size: 10px;
+}
+
+.title>span {
+    max-width: 240px;
+    color: #bebebe;
+    text-align: right;
+    font-size: 8px;
+    letter-spacing: 1.3px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+}
+
+.card {
+    min-height: 195px;
+    padding: 14px;
+    display: grid;
+    grid-template-columns: 47% 53%;
+    gap: 14px;
+    border: 1px solid var(--site-primary);
+    border-radius: 11px;
+    background: rgba(14, 15, 18, 0.92);
+}
+
+.description h3 {
+    margin: 0 0 7px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--site-primary);
+    font-size: 14px;
+}
+
+.description p {
+    margin: 0 0 10px;
+    color: #ddd;
+    font-size: 10px;
+    line-height: 1.35;
+}
+
+.description ul {
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 4px;
+    list-style: none;
+}
+
+.description li {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: #e5e5e5;
+    font-size: 9px;
+}
+
+.description li span {
+    color: var(--site-secondary);
+}
+
+.preview {
+    position: relative;
+    min-height: 160px;
+    display: grid;
+    place-content: center;
+    text-align: center;
+    overflow: hidden;
+    border: 1px solid #3a3d42;
+    border-radius: 9px;
+    color: var(--site-primary);
+    background:
+        radial-gradient(circle,
+            rgba(236, 175, 29, 0.18),
+            transparent 48%),
+        #0f1114;
+}
+
+.preview img {
+    object-fit: cover;
+}
+
+.preview strong {
+    margin-top: 3px;
+    color: #fff;
+    font-size: 40px;
+    line-height: 1;
+}
+
+.preview small {
+    margin-top: 5px;
+    color: #d3d3d3;
+    font-size: 8px;
+}
+
+@media (max-width: 900px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .title {
+        grid-template-columns: 40px 1fr;
+    }
+
+    .title>span {
+        display: none;
+    }
+}
+
+@media (max-width: 620px) {
+    .section {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    .card {
+        grid-template-columns: 1fr;
+    }
+}

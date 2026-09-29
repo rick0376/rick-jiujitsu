@@ -1,0 +1,280 @@
+// src/components/site/home/Hero/styles.module.scss
+
+.hero {
+    position: relative;
+    min-height: 610px;
+    overflow: hidden;
+    color: #fff;
+
+    background:
+        linear-gradient(90deg,
+            rgba(3, 4, 5, 0.92) 0%,
+            rgba(4, 5, 6, 0.7) 43%,
+            rgba(4, 5, 6, 0.18) 100%),
+        url("/images/login/login-background-desktop.png") center 42% / cover no-repeat;
+
+    background-position: center;
+    background-size: cover;
+}
+
+.shade {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+
+    background:
+        radial-gradient(circle at 72% 28%,
+            rgba(226, 169, 29, 0.12),
+            transparent 31%),
+        linear-gradient(180deg,
+            rgba(0, 0, 0, 0.06),
+            rgba(0, 0, 0, 0.3));
+}
+
+.content {
+    position: relative;
+    z-index: 2;
+
+    width: min(1200px, calc(100% - 40px));
+    min-height: 610px;
+
+    margin: 0 auto;
+    padding-top: 78px;
+
+    display: grid;
+    grid-template-columns: 80px minmax(0, 650px) 1fr;
+    align-items: center;
+}
+
+.sideLeft,
+.sideRight {
+    display: flex;
+    flex-direction: column;
+
+    color: rgba(255, 255, 255, 0.78);
+
+    font-size: 9px;
+    font-weight: 800;
+    line-height: 1.35;
+    letter-spacing: 2px;
+
+    text-transform: uppercase;
+}
+
+.sideLeft {
+    align-self: start;
+
+    margin-top: 54px;
+    padding-left: 10px;
+
+    position: relative;
+}
+
+.sideLeft::before {
+    content: "";
+
+    position: absolute;
+    left: 0;
+    top: 1px;
+
+    width: 2px;
+    height: 100%;
+
+    background: var(--site-primary);
+}
+
+.sideRight {
+    align-self: start;
+    justify-self: end;
+
+    margin-top: 76px;
+    padding-left: 16px;
+
+    border-left: 3px solid var(--site-primary);
+}
+
+.text {
+    max-width: 650px;
+}
+
+.text h1 {
+    margin: 0;
+
+    font-size: clamp(48px, 5vw, 72px);
+    line-height: 0.94;
+
+    font-weight: 950;
+    letter-spacing: -2px;
+
+    text-transform: uppercase;
+
+    text-shadow: 0 5px 18px rgba(0, 0, 0, 0.5);
+}
+
+.text h1 strong {
+    color: var(--site-primary);
+}
+
+.text h2 {
+    margin: 13px 0 18px;
+
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 3px;
+}
+
+.text p {
+    max-width: 600px;
+
+    margin: 0;
+
+    color: #ececec;
+
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+.buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+
+    margin-top: 26px;
+}
+
+.primary,
+.secondary {
+    min-height: 47px;
+
+    padding: 0 20px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+
+    border-radius: 7px;
+
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.primary {
+    color: #111;
+
+    background: linear-gradient(135deg,
+            var(--site-secondary),
+            var(--site-primary));
+}
+
+.secondary {
+    color: #fff;
+
+    border: 1px solid var(--site-primary);
+
+    background: rgba(5, 5, 5, 0.55);
+}
+
+@media (max-width: 900px) {
+    .hero {
+        min-height: 650px;
+    }
+
+    .content {
+        width: calc(100% - 28px);
+        min-height: 650px;
+
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: flex-end;
+
+        padding-top: 92px;
+        padding-bottom: 66px;
+    }
+
+    .sideLeft {
+        order: 1;
+
+        margin: 0 0 22px;
+        padding-left: 12px;
+
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 5px 11px;
+
+        font-size: 8px;
+        line-height: 1.2;
+        letter-spacing: 1.5px;
+    }
+
+    .sideLeft::before {
+        top: 0;
+        bottom: 0;
+        height: auto;
+    }
+
+    .sideLeft span {
+        position: relative;
+    }
+
+    .sideLeft span:not(:last-child)::after {
+        content: "•";
+        margin-left: 11px;
+        color: var(--site-primary);
+    }
+
+    .text {
+        order: 2;
+        width: 100%;
+        max-width: none;
+    }
+
+    .sideRight {
+        display: none;
+    }
+
+    .text h1 {
+        font-size: clamp(40px, 12vw, 58px);
+    }
+
+    .text h2 {
+        font-size: 12px;
+        letter-spacing: 1.4px;
+    }
+
+    .text p {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 620px) {
+    .content {
+        width: calc(100% - 24px);
+        padding-top: 86px;
+        padding-bottom: 34px;
+    }
+
+    .sideLeft {
+        margin-bottom: 18px;
+
+        gap: 4px 8px;
+
+        font-size: 7px;
+        letter-spacing: 1.2px;
+    }
+
+    .sideLeft span:not(:last-child)::after {
+        margin-left: 8px;
+    }
+
+    .buttons {
+        flex-direction: column;
+    }
+
+    .primary,
+    .secondary {
+        width: 100%;
+    }
+}
