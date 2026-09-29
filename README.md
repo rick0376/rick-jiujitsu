@@ -1,4 +1,4 @@
-# Mandiok Jiu-Jitsu — Sistema de Gestão
+# Rick Jiu-Jitsu — Sistema de Gestão
 
 Base completa e modular para gestão de uma equipe de Jiu-Jitsu.
 
