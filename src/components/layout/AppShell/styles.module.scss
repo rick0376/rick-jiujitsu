@@ -2,537 +2,110 @@
 
 .shell {
     display: grid;
-    grid-template-columns: 250px 1fr;
+    grid-template-columns: 250px minmax(0, 1fr);
     min-height: 100vh;
 }
-
-.sidebar {
-    position: sticky;
-    top: 0;
-
-    height: 100vh;
-    padding: 20px 14px;
-
-    display: flex;
-    flex-direction: column;
-
-    background: #111216;
-    color: #fff;
-}
-
-.brand {
-    padding: 8px;
-
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.brand>span {
-    width: 40px;
-    height: 40px;
-
-    display: grid;
-    place-items: center;
-
-    border: 2px solid var(--gold);
-    border-radius: 11px;
-
-    color: #fff;
-
-    font-weight: 900;
-}
-
-.brand div {
-    display: grid;
-
-    line-height: 1;
-}
-
-.brand b {
-    color: #fff;
-
-    font-size: 15px;
-}
-
-.brand small {
-    margin-top: 4px;
-
-    color: var(--gold-2);
-
-    font-size: 9px;
-    letter-spacing: 3px;
-}
-
-.brand button {
-    display: none;
-}
-
-.sidebar nav {
-    margin-top: 25px;
-
-    display: grid;
-    gap: 5px;
-}
-
-.sidebar nav>a {
-    min-height: 46px;
-    padding: 8px 11px;
-
-    display: flex;
-    align-items: center;
-    gap: 10px;
-
-    position: relative;
-
-    border: 1px solid transparent;
-    border-radius: 12px;
-
-    color: #c9cbd0;
-    background: transparent;
-
-    font-size: 13px;
-    font-weight: 500;
-
-    transition:
-        background 0.18s ease,
-        border-color 0.18s ease,
-        color 0.18s ease,
-        transform 0.18s ease;
-}
-
-.sidebar nav>a svg {
-    width: 30px;
-    height: 30px;
-    padding: 6px;
-
-    flex: 0 0 30px;
-
-    border: 1px solid transparent;
-    border-radius: 9px;
-
-    color: #bfc2c8;
-
-    transition:
-        color 0.18s ease,
-        border-color 0.18s ease,
-        background 0.18s ease;
-}
-
-.sidebar nav>a:hover {
-    color: #fff;
-    background: #1b1d22;
-    border-color: #2e3138;
-}
-
-.sidebar nav>a:hover svg {
-    color: var(--gold-2);
-}
-
-/* =========================================================
-   ITEM ATIVO
-   ========================================================= */
-
-.sidebar nav>a.active {
-    color: #fff;
-
-    background:
-        linear-gradient(90deg,
-            rgba(230, 170, 34, 0.12),
-            rgba(34, 36, 42, 0.94));
-
-    border-color: var(--gold);
-
-    box-shadow:
-        inset 3px 0 0 var(--gold),
-        0 4px 18px rgba(0, 0, 0, 0.2);
-}
-
-.sidebar nav>a.active svg {
-    color: var(--gold-2);
-
-    border-color: var(--gold);
-
-    background:
-        rgba(230, 170, 34, 0.08);
-
-    box-shadow:
-        0 0 0 1px rgba(230, 170, 34, 0.08);
-}
-
-.sidebar nav>a.active span {
-    font-weight: 700;
-}
-
-/* =========================================================
-   GRUPO CONFIGURAÇÕES
-   ========================================================= */
-
-.navGroup {
-    display: grid;
-    gap: 4px;
-}
-
-.navGroupButton {
-    width: 100%;
-    min-height: 46px;
-    padding: 8px 11px;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    border: 1px solid transparent;
-    border-radius: 12px;
-
-    color: #c9cbd0;
-    background: transparent;
-
-    font: inherit;
-    font-size: 13px;
-    font-weight: 500;
-
-    cursor: pointer;
-
-    transition:
-        background 0.18s ease,
-        border-color 0.18s ease,
-        color 0.18s ease;
-}
-
-.navGroupButton:hover {
-    color: #fff;
-
-    background: #1b1d22;
-
-    border-color: #2e3138;
-}
-
-.navGroupButtonLeft {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.navGroupButtonLeft>svg {
-    width: 30px;
-    height: 30px;
-    padding: 6px;
-
-    flex: 0 0 30px;
-
-    border: 1px solid transparent;
-    border-radius: 9px;
-
-    color: #bfc2c8;
-
-    transition:
-        color 0.18s ease,
-        border-color 0.18s ease,
-        background 0.18s ease;
-}
-
-.navGroupButton:hover .navGroupButtonLeft>svg {
-    color: var(--gold-2);
-}
-
-.chevron {
-    color: #8d9098;
-
-    transition: color 0.18s ease;
-}
-
-/* =========================================================
-   CONFIGURAÇÕES ATIVA
-   ========================================================= */
-
-.navGroupActive {
-    color: #fff;
-
-    background:
-        linear-gradient(90deg,
-            rgba(230, 170, 34, 0.12),
-            rgba(34, 36, 42, 0.94));
-
-    border-color: var(--gold);
-
-    box-shadow:
-        inset 3px 0 0 var(--gold),
-        0 4px 18px rgba(0, 0, 0, 0.2);
-}
-
-.navGroupActive .navGroupButtonLeft>svg {
-    color: var(--gold-2);
-
-    border-color: var(--gold);
-
-    background:
-        rgba(230, 170, 34, 0.08);
-}
-
-.navGroupActive .navGroupButtonLeft>span {
-    font-weight: 700;
-}
-
-.navGroupActive .chevron {
-    color: var(--gold-2);
-}
-
-/* =========================================================
-   SUBMENU
-   ========================================================= */
-
-.submenu {
-    position: relative;
-
-    margin: 2px 0 4px 18px;
-    padding: 3px 0 3px 15px;
-
-    display: grid;
-    gap: 3px;
-}
-
-.submenu::before {
-    content: "";
-
-    position: absolute;
-    left: 0;
-    top: 3px;
-    bottom: 3px;
-
-    width: 1px;
-
-    background:
-        rgba(230, 170, 34, 0.25);
-}
-
-.sidebar nav .submenu a {
-    min-height: 38px;
-    padding: 5px 9px;
-
-    display: flex;
-    align-items: center;
-    gap: 9px;
-
-    border: 1px solid transparent;
-    border-radius: 9px;
-
-    color: #aaaeb6;
-    background: transparent;
-
-    font-size: 12px;
-
-    transition:
-        background 0.18s ease,
-        color 0.18s ease,
-        border-color 0.18s ease;
-}
-
-.sidebar nav .submenu a svg {
-    width: 26px;
-    height: 26px;
-    padding: 5px;
-
-    flex: 0 0 26px;
-
-    border: 1px solid transparent;
-    border-radius: 50%;
-
-    color: #9ea2aa;
-}
-
-.sidebar nav .submenu a:hover {
-    color: #fff;
-
-    background: #1a1c21;
-}
-
-.sidebar nav .submenu a:hover svg {
-    color: var(--gold-2);
-}
-
-/* =========================================================
-   SUBMENU ATIVO
-   ========================================================= */
-
-.sidebar nav .submenu a.submenuActive {
-    color: #fff;
-
-    border-color:
-        rgba(230, 170, 34, 0.45);
-
-    background:
-        rgba(230, 170, 34, 0.09);
-}
-
-.sidebar nav .submenu a.submenuActive svg {
-    color: var(--gold-2);
-
-    border-color: var(--gold);
-
-    background:
-        rgba(230, 170, 34, 0.1);
-}
-
-.sidebar nav .submenu a.submenuActive span {
-    font-weight: 700;
-}
-
-/* =========================================================
-   LOGOUT
-   ========================================================= */
-
-.logout {
-    width: 100%;
-    min-height: 43px;
-    margin-top: auto;
-    padding: 10px 12px;
-
-    display: flex;
-    align-items: center;
-    gap: 11px;
-
-    border: 1px solid transparent;
-    border-radius: 11px;
-
-    color: #e3e4e7;
-    background: #1b1c21;
-
-    font-size: 13px;
-
-    cursor: pointer;
-
-    transition:
-        background 0.18s ease,
-        border-color 0.18s ease,
-        color 0.18s ease;
-}
-
-.logout:hover {
-    color: #fff;
-
-    background: #22242a;
-
-    border-color: #363942;
-}
-
-.logout svg {
-    color: #d4d6da;
-}
-
-/* =========================================================
-   CONTEÚDO
-   ========================================================= */
 
 .content {
     min-width: 0;
 }
 
-.content>header {
+.header {
     height: 68px;
     padding: 0 28px;
-
     display: flex;
     align-items: center;
     justify-content: flex-end;
-
     background: #fff;
-
-    border-bottom:
-        1px solid #e2e4e8;
+    border-bottom: 1px solid #e2e4e8;
 }
 
-.content>header div {
+.user {
     display: grid;
-
     text-align: right;
 }
 
-.content>header span {
-    color: #777;
+.user b {
+    color: #17181c;
+    font-size: 13px;
+}
 
+.user span {
+    margin-top: 2px;
+    color: #777;
     font-size: 11px;
 }
 
-.content main {
+.main {
     padding: 28px;
 }
 
-.menu {
-    display: none;
-}
-
+.menu,
 .backdrop {
     display: none;
 }
-
-/* =========================================================
-   RESPONSIVO
-   ========================================================= */
 
 @media (max-width: 900px) {
     .shell {
         grid-template-columns: 1fr;
     }
 
-    .sidebar {
-        position: fixed;
-        left: -280px;
-        z-index: 20;
-
-        width: 250px;
-
-        transition: left 0.2s ease;
-    }
-
-    .sidebar.open {
-        left: 0;
-    }
-
-    .brand button {
-        margin-left: auto;
-
-        display: block;
-
-        border: 0;
-
-        color: #fff;
-        background: none;
-
-        cursor: pointer;
-    }
-
-    .content>header {
+    .header {
         justify-content: space-between;
+        padding: 0 18px;
     }
 
     .menu {
-        padding: 8px;
-
-        display: block;
-
-        border: 0;
+        width: 40px;
+        height: 40px;
+        padding: 0;
+        display: grid;
+        place-items: center;
+        border: 1px solid #e1e2e5;
         border-radius: 10px;
-
+        color: #22242a;
         background: #f1f2f4;
-
         cursor: pointer;
+    }
+
+    .menu:hover {
+        background: #e8e9eb;
     }
 
     .backdrop {
         position: fixed;
         inset: 0;
         z-index: 15;
-
         display: block;
-
         border: 0;
-
-        background:
-            rgba(0, 0, 0, 0.4);
+        background: rgba(0, 0, 0, 0.45);
+        cursor: pointer;
     }
 
-    .content main {
+    .main {
         padding: 18px;
+    }
+}
+
+@media (max-width: 620px) {
+    .header {
+        height: 62px;
+        padding: 0 14px;
+    }
+
+    .user b {
+        font-size: 12px;
+    }
+
+    .user span {
+        max-width: 190px;
+        overflow: hidden;
+        font-size: 10px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .main {
+        padding: 14px;
     }
 }

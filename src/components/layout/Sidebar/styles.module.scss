@@ -1,0 +1,312 @@
+// src/components/layout/Sidebar/styles.module.scss
+
+.sidebar {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    width: 250px;
+    height: 100vh;
+    padding: 20px 14px;
+    display: flex;
+    flex-direction: column;
+    color: #fff;
+    background: #111216;
+}
+
+.brand {
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.brandMark {
+    width: 40px;
+    height: 40px;
+    flex: 0 0 40px;
+    display: grid;
+    place-items: center;
+    border: 2px solid var(--gold);
+    border-radius: 11px;
+    color: #fff;
+    font-weight: 900;
+}
+
+.brandText {
+    min-width: 0;
+    display: grid;
+    line-height: 1;
+}
+
+.brandText b {
+    color: #fff;
+    font-size: 15px;
+}
+
+.brandText small {
+    margin-top: 4px;
+    color: var(--gold-2);
+    font-size: 9px;
+    letter-spacing: 3px;
+}
+
+.close {
+    margin-left: auto;
+    display: none;
+    border: 0;
+    color: #fff;
+    background: transparent;
+    cursor: pointer;
+}
+
+.nav {
+    margin-top: 25px;
+    display: grid;
+    gap: 5px;
+}
+
+.navItem {
+    position: relative;
+    min-height: 46px;
+    padding: 8px 11px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid transparent;
+    border-radius: 12px;
+    color: #c9cbd0;
+    background: transparent;
+    font-size: 13px;
+    font-weight: 500;
+    transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease;
+}
+
+.navIcon {
+    width: 30px;
+    height: 30px;
+    flex: 0 0 30px;
+    display: grid;
+    place-items: center;
+    border: 1px solid transparent;
+    border-radius: 9px;
+    color: #bfc2c8;
+    background: transparent;
+    transition: color 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+}
+
+.navItem:hover {
+    color: #fff;
+    background: #1b1d22;
+    border-color: #2e3138;
+}
+
+.navItem:hover .navIcon {
+    color: var(--gold-2);
+}
+
+.navItem.active {
+    color: #fff;
+    border-color: var(--gold);
+    background: linear-gradient(90deg, rgba(230, 170, 34, 0.12), rgba(34, 36, 42, 0.94));
+    box-shadow: inset 3px 0 0 var(--gold), 0 4px 18px rgba(0, 0, 0, 0.2);
+}
+
+.navItem.active .navIcon {
+    color: var(--gold-2);
+    border-color: var(--gold);
+    background: rgba(230, 170, 34, 0.08);
+    box-shadow: 0 0 0 1px rgba(230, 170, 34, 0.08);
+}
+
+.navItem.active>span:last-child {
+    font-weight: 700;
+}
+
+/* CONFIGURAÇÕES */
+
+.navGroup {
+    display: grid;
+    gap: 4px;
+}
+
+.navGroupButton {
+    width: 100%;
+    min-height: 46px;
+    padding: 8px 11px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid transparent;
+    border-radius: 12px;
+    color: #c9cbd0;
+    background: transparent;
+    font: inherit;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease;
+}
+
+.navGroupButton:hover {
+    color: #fff;
+    background: #1b1d22;
+    border-color: #2e3138;
+}
+
+.navGroupButtonLeft {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.navGroupButton:hover .navIcon {
+    color: var(--gold-2);
+}
+
+.chevron {
+    flex-shrink: 0;
+    color: #8d9098;
+    transition: color 0.18s ease, transform 0.18s ease;
+}
+
+.navGroupActive {
+    color: #fff;
+    border-color: var(--gold);
+    background: linear-gradient(90deg, rgba(230, 170, 34, 0.12), rgba(34, 36, 42, 0.94));
+    box-shadow: inset 3px 0 0 var(--gold), 0 4px 18px rgba(0, 0, 0, 0.2);
+}
+
+.navGroupActive .navIcon {
+    color: var(--gold-2);
+    border-color: var(--gold);
+    background: rgba(230, 170, 34, 0.08);
+}
+
+.navGroupActive .navGroupButtonLeft>span:last-child {
+    font-weight: 700;
+}
+
+.navGroupActive .chevron {
+    color: var(--gold-2);
+}
+
+/* SUBMENU */
+
+.submenu {
+    position: relative;
+    margin: 2px 0 4px 18px;
+    padding: 3px 0 3px 15px;
+    display: grid;
+    gap: 3px;
+}
+
+.submenu::before {
+    content: "";
+    position: absolute;
+    top: 3px;
+    bottom: 3px;
+    left: 0;
+    width: 1px;
+    background: rgba(230, 170, 34, 0.25);
+}
+
+.submenuItem {
+    min-height: 38px;
+    padding: 5px 9px;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    border: 1px solid transparent;
+    border-radius: 9px;
+    color: #aaaeb6;
+    background: transparent;
+    font-size: 12px;
+    transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease;
+}
+
+.submenuIcon {
+    width: 26px;
+    height: 26px;
+    flex: 0 0 26px;
+    display: grid;
+    place-items: center;
+    border: 1px solid transparent;
+    border-radius: 50%;
+    color: #9ea2aa;
+    background: transparent;
+}
+
+.submenuItem:hover {
+    color: #fff;
+    background: #1a1c21;
+}
+
+.submenuItem:hover .submenuIcon {
+    color: var(--gold-2);
+}
+
+.submenuItem.submenuActive {
+    color: #fff;
+    border-color: rgba(230, 170, 34, 0.45);
+    background: rgba(230, 170, 34, 0.09);
+}
+
+.submenuItem.submenuActive .submenuIcon {
+    color: var(--gold-2);
+    border-color: var(--gold);
+    background: rgba(230, 170, 34, 0.1);
+}
+
+.submenuItem.submenuActive>span:last-child {
+    font-weight: 700;
+}
+
+/* LOGOUT */
+
+.logout {
+    width: 100%;
+    min-height: 43px;
+    margin-top: auto;
+    padding: 10px 12px;
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    border: 1px solid transparent;
+    border-radius: 11px;
+    color: #e3e4e7;
+    background: #1b1c21;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease;
+}
+
+.logout:hover {
+    color: #fff;
+    background: #22242a;
+    border-color: #363942;
+}
+
+.logout svg {
+    color: #d4d6da;
+}
+
+/* RESPONSIVO */
+
+@media (max-width: 900px) {
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: -280px;
+        width: 250px;
+        transition: left 0.2s ease;
+    }
+
+    .sidebar.open {
+        left: 0;
+    }
+
+    .close {
+        display: grid;
+        place-items: center;
+    }
+}
